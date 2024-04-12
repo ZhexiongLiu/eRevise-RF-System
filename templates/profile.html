@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+  
+{% block title %}Login{% endblock %}
+  
+{% block content %}
+{#   <h2>Welcome!</h2>#}
+    <br><br><br><br><br>
+{#    <div class="d-flex">#}
+   {% if user.is_authenticated %}
+{#      Hi {{ user.username }}!#}
+{#      <a href="/signout" class="btn btn-danger">Logout</a>#}
+       <a href="/mvp" class="btn btn-primary mr-2">Submit MVP Essay</a>
+       <a href="/space" class="btn btn-primary mr-2">Submit Space Essay</a>
+       <a href="/roaster" class="btn btn-primary mr-2">Show Roaster</a>
+       <a href="/upload" class="btn btn-primary mr-2">Upload Roaster</a>
+    {% else %}
+      <a href="/signin" class="btn btn-primary mr-2"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+      <a href="/signup" class="btn btn-success mr-2">Signup</a>
+    {% endif %}
+{#    </div>#}
+{% endblock %}

@@ -1,0 +1,98 @@
+/* Move down content because we have a fixed navbar that is 2rem tall */
+body {
+    padding-top: 2rem;
+    background-color: #fffff9;
+    /*font-family: 'Lato', sans-serif;*/
+    font-family: Times, "Times New Roman", serif;
+    /*font-family: et-bembo, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
+}
+
+h1, h2, h3, h4 {
+    /*font-variant: small-caps;*/
+    /*font-weight: 400;*/
+    font-weight: 400;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+    /*color: #003594;*/
+}
+
+.container {
+    width: 100%;
+    max-width: 960px;
+    font-size: 103%;
+}
+
+.container_costumed {
+    width: 95%;
+    max-width: 850px;
+}
+
+.navbar {
+    /*background-color: #003594;*/
+    background-color: #00205B;
+    font-variant: small-caps;
+    font-size: large;
+}
+
+
+.author_avatar {
+    display: table-cell;
+    vertical-align: top;
+    max-width: 250px;
+    width: 100%;
+    border: 0px solid black;
+    padding-bottom: 10px;
+}
+
+
+.lecture_table {
+    width: 15%;
+    height: 30px;
+    /*style="width: 25.870646766169155%; height: 29px;*/
+}
+
+
+a:link {
+    /*color: #003594;*/
+    /*color: #00205B;*/
+    /*color: blue;*/
+    color: #0033A0;
+
+}
+
+a:visited {
+    /*color: #003594;*/
+    /*color: #00205B;*/
+    color: purple;
+}
+
+a:hover {
+    /*color: #003594;*/
+    /*color: #00205B;*/
+    /*color: blue;*/
+    color: #0033A0;
+}
+
+ul {
+    padding-left: 1.1em;
+}
+
+
+img {
+    max-width: 400px;
+    width: 100%;
+    /*pointer-events: none;*/
+}
+
+img.author_avatar {
+    cursor: pointer;
+}
+
+iframe {
+    max-width: 560px;
+    min-height: 315px;
+    width: 100%;
+}
+
+
+

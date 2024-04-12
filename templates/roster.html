@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}eRevise System{% endblock %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <title>Student Roster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+
+        h2 {
+            margin-left: 40%;
+            margin-right: 30%;
+            {#margin-bottom: -10px; /* Add margin between title and table */#}
+        }
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            {#margin-top: -50px; /* Adjust the margin as needed */#}
+            {#margin-top: 20%;#}
+            margin-left: 20%;
+            margin-right: 30%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 20%; /* Set equal width for each column */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+{#<div class="d-flex">#}
+{#   {% if user.is_authenticated %}#}
+{#      Hi {{ user.username }}!#}
+{#      <a href="/signout" class="btn btn-danger">Logout</a>#}
+{#       <a href="/mvp" class="btn btn-primary mr-2">Submit MVP Essay</a>#}
+{#       <a href="/space" class="btn btn-primary mr-2">Submit Space Essay</a>#}
+{#       <a href="/roaster" class="btn btn-primary mr-2">Show Roaster</a>#}
+{#       <a href="/upload" class="btn btn-primary mr-2">Upload Roaster</a>#}
+{#    {% else %}#}
+{#      <a href="/signin" class="btn btn-primary mr-2"><span class="glyphicon glyphicon-log-in"></span>Login</a>#}
+{#      <a href="/signup" class="btn btn-success ">Signup</a>#}
+{#    {% endif %}#}
+{#</div>#}
+{% if user.is_authenticated and user.is_staff %}
+<br>
+    <h2>Student Roster</h2>
+                <br><br>
+    <table border="1">
+        <tr>
+            <th>Teacher ID</th>
+            <th>Teacher Name</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+        </tr>
+        {% for person in people %}
+            <tr>
+            <td>{{ person.teacher_id }}</td>
+            <td>{{ person.teacher_name }}</td>
+            <td>{{ person.student_id }}</td>
+            <td>{{ person.student_name}}</td>
+{#            {% if user.is_superuser == False and person.teacher_id == user.username %}#}
+{#                <td>{{ person.teacher_id }}</td>#}
+{#                <td>{{ person.teacher_name }}</td>#}
+{#                <td>{{ person.student_id }}</td>#}
+{#                <td>{{ person.student_name}}</td>#}
+{#            {% endif %}#}
+{#            {% if user.is_superuser == True %}#}
+{#                <td>{{ person.teacher_id }}</td>#}
+{#                <td>{{ person.teacher_name }}</td>#}
+{#                <td>{{ person.student_id }}</td>#}
+{#                <td>{{ person.student_name}}</td>#}
+{#            {% endif %}#}
+            </tr>
+        {% endfor %}
+    </table>
+    <br><br><br><br>
+    {% endif %}
+{% endblock %}

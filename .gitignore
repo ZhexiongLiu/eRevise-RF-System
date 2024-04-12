@@ -1,0 +1,6 @@
+.vector_cache/
+logs/
+*.pkl
+*.pth
+.DS_Store
+__pycache__/

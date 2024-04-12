@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Hide default body scrollbars */
+    }
+
+    #container {
+      display: flex;
+      height: 100vh; /* 100% of the viewport height */
+    }
+
+    #left, #right {
+      flex: 1;
+      padding: 20px;
+      overflow-y: scroll; /* Always show a hidden scrollbar, even if it's not in use */
+    }
+
+    #left {
+      background-color: #f0f0f0;
+    }
+
+    #right {
+      background-color: #ffffff;
+    }
+
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .textbox-container {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      box-sizing: border-box;
+      overflow: hidden; /* Hide the scrollbar within the textarea */
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar">Fixed Navigation Bar</div>
+
+  <div id="container">
+    <div id="left">
+      <h2>Left Content</h2>
+      <div class="textbox-container">
+        <textarea placeholder="Left Textbox"></textarea>
+      </div>
+      <!-- Add more content as needed -->
+    </div>
+    <div id="right">
+      <h2>Right Content</h2>
+      <div class="textbox-container">
+        <textarea placeholder="Right Textbox"></textarea>
+      </div>
+      <!-- Add more content as needed -->
+    </div>
+  </div>
+
+</body>
+</html>

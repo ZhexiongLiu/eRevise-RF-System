@@ -1,0 +1,78 @@
+<!-- your_template.html -->
+{#{% extends 'base.html' %}#}
+<!DOCTYPE html>
+<html lang="en">
+{#{% extends 'base.html' %}#}
+<head>
+    <meta charset="UTF-8">
+    <title>Student Roaster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 10px;
+            flex-direction: column; /* Set flex-direction to column */
+        }
+        h2 {
+            margin-bottom: 0px; /* Add margin between title and table */
+        }
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin-top: -50px; /* Adjust the margin as needed */
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 20%; /* Set equal width for each column */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="d-flex">
+   {% if user.is_authenticated %}
+{#      Hi {{ user.username }}!#}
+{#      <a href="/signout" class="btn btn-danger">Logout</a>#}
+       <a href="/mvp" class="btn btn-primary mr-2">Submit MVP Essay</a>
+       <a href="/space" class="btn btn-primary mr-2">Submit Space Essay</a>
+       <a href="/roaster" class="btn btn-primary mr-2">Show Roaster</a>
+       <a href="/upload" class="btn btn-primary mr-2">Upload Roaster</a>
+    {% else %}
+      <a href="/signin" class="btn btn-primary mr-2"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+      <a href="/signup" class="btn btn-success ">Signup</a>
+    {% endif %}
+</div>
+{% if user.is_authenticated %}
+<br>
+    <h2>Student Roaster</h2>
+                <br><br><br><br><br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Teacher ID</th>
+            <th>Teacher First Name</th>
+            <th>Teacher Last Name</th>
+            <th>Student ID</th>
+            <th>Student Username</th>
+        </tr>
+        {% for person in people %}
+            <tr>
+                <td>{{ person.teacher_id }}</td>
+                <td>{{ person.teacher_firstname }}</td>
+                <td>{{ person.teacher_lastname }}</td>
+                <td>{{ person.student_id }}</td>
+                <td>{{ person.student_username}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

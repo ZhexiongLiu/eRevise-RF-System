@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <div class="col1">
+        <h5>Essay Topic</h5>
+        {#    <img src="{% static "images/mvp_article.png" %}" alt="MVP Essay"/>#}
+        {% if submited_essay is not None %}
+            {% include 'MVP_essay_color.html' %}
+        {% else %}
+            {% include 'MVP.html' %}
+        {% endif %}
+
+        <br><br><br><br><br><br><br><br>
+    </div>
+
+    <div class="col2">
+        <h5>Prompt</h5>
+        {{ init_prompt }}
+        {#    {% for prompt in prompt_list %}#}
+        {#        {{ prompt }}#}
+        {#    {% endfor %}#}
+        <br>
+        <form name="submit" method="post" id="submit_form">
+            {% csrf_token %}
+            <hr>
+            {% if submited_essay is not None %}
+                <h5>Latest Submitted Essay </h5>
+                {{ submited_essay }}
+
+{#                {% if submited_essay is not None %}#}
+{#                    {% include 'MVP_submission_color.html' %}#}
+{#                {% endif %}#}
+                <hr>
+                <h5>Revise Suggestions</h5>
+                {% for feedback in feedback_list %}
+                    <h6>{{ feedback.title }}</h6>
+                    {% for text in feedback.content %}
+                        <li>{{ text }}</li>
+                    {% endfor %}
+                    <br>
+                {% endfor %}
+                <hr>
+                <h5>Submit Your Essay {{ revision.essay_revision }}</h5><br>
+                {{ form.essay }}
+            {% else %}
+                <h5>Submit Your Essay {{ revision.essay_revision }} </h5><br>
+                {{ form.essay }}
+            {% endif %}
+            <br>
+            {#    <br>#}
+            {#    {% endfor %}#}
+            {#    <h5>Revise Your Essay</h5>#}
+            {#    {{form.essay }}#}
+            {#    <br>#}
+            <button class="btn btn-lg btn-success btn-block" type="submit">Submit</button>
+            <br>
+        </form>
+        <br><br>
+    </div>
+
+
+    {#    <form name="submit" method="post" id="submit_form">#}
+    {#        {% csrf_token %}#}
+    {#        <label for="first_name">UserName:</label><br>#}
+    {#        <input type="text" id="user_name" name="user_name"><br>#}
+    {#        <label for="last_name">Prompt Name:</label><br>#}
+    {#        <input type="text" id="prompt_name" name="prompt_name"><br>#}
+    {#        <label for="essay_revision">Essay Revision:</label><br>#}
+    {#        <input type="text" id="essay_revision" name="essay_revision"><br>#}
+    {#        <label for="essay">Input your essay:</label><br>#}
+    {#        <textarea rows="5" cols="80" id="essay" form="submit_form" name="essay"></textarea><br>#}
+    {#        <button type="submit" class="btn btn-success">Submit</button>#}
+    {#            {% for field in form %}#}
+    {#      <p>#}
+    {#        {% if not form.is_valid %}#}
+    {#          <p style="color: blue">invalid submission</p>#}
+    {#        {% endif %}#}
+    {#      </p>#}
+    {#                <p>{{ form.POST }}</p>#}
+    {#    {% endfor %}#}
+    {#    </form>#}
+{% endblock %}

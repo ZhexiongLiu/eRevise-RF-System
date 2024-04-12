@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eRevise System</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: #0033A0;
+             z-index: 1000;
+            {#background-color: #00205B;#}
+            {#color: #0033A0;#}
+        {#    background-color: blue;#}{#font-variant: small-caps;#} font-size: large;
+        }
+
+        .content {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-group {
+        display: inline-block;
+        margin-right: 0px; /* Adjust as needed */
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0px; /* Adjust as needed */
+    }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand" href="/index">&nbsp;&nbsp;&nbsp;&nbsp;eRevise System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{#    <div class="collapse navbar-collapse" id="navbarNav">#}
+{#        <ul class="navbar-nav">#}
+{##}
+{#            {% if user.is_authenticated %}#}
+{#                <li class="nav-item active">#}
+{#                    {% if user.email == "1" %}#}
+{#                        <a class="nav-link" href="/mvp/article">Article</a>#}
+{#                    {% elif user.email == 0 %}#}
+{#                        <a class="nav-link" href="/space">Essay</a>#}
+{#                    {% else %}#}
+{#                        <a class="nav-link" href="/space/article">Article</a>#}
+{#                    {% endif %}#}
+{##}
+{#                </li>#}
+{#                <li class="nav-item active">#}
+{#                    {% if user.email == "1" %}#}
+{#                        <a class="nav-link" href="/mvp">Essay</a>#}
+{#                    {% elif user.email == 0 %}#}
+{#                        <a class="nav-link" href="/space">Essay</a>#}
+{#                    {% else %}#}
+{#                        <a class="nav-link" href="/space">Essay</a>#}
+{#                    {% endif %}#}
+{##}
+{#                </li>#}
+{#                <li class="nav-item dropdown active">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
+{#                       data-toggle="dropdown"#}
+{#                       aria-haspopup="true" aria-expanded="false">#}
+{#                        Essays#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="/mvp">MVP essay</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="/space">SPACE essay</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#            {% if user.is_authenticated and user.is_staff %}#}
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link" href="/submission">Submission</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#            {% if user.is_authenticated and user.is_staff and user.is_superuser%}#}
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link" href="/process">Process</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#                    {% if user.is_authenticated and user.is_staff %}#}
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link" href="/roster">Roster</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#                            {% if user.is_authenticated and user.is_staff and user.is_superuser%}#}
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link" href="/upload">Upload</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#            <li class="nav-item active">#}
+{#                <a class="nav-link" href="https://sites.google.com/view/erevise">About</a>#}
+{#            </li>#}
+{#        </ul>#}
+{##}
+{#        <!-- Right-aligned items -->#}
+{#        <ul class="navbar-nav ml-auto">#}
+{#            {% if user.is_authenticated %}#}
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link" role="button">{{ user.first_name }} </a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a href="/signout" class="btn btn-danger">Logout</a>#}
+                    {#                <a href="/profile" class="btn btn-primary">Profile</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+</nav>
+<div class="content">
+{#    {% if not teacher_info %}#}
+        <h2> Student Portal</h2>
+{#    {% endif %}#}
+    <form method="post">
+        {% csrf_token %}
+
+{#         <div style="display: none;">{{ form.username.label_tag }} {{ form.username }}</div>#}
+{#        {% if not teacher_info %}#}
+{#        {{ form.teacher_id }}#}
+{##}
+{#        {% if teacher_info %}#}
+{#        <!-- Display student ID input box when teacher_info is not None -->#}
+{#        <label for="{{ form.student_id.id_for_label }}">Enter Student ID:</label>#}
+{#        {{ form.student_id }}#}
+{#        {% endif %}#}
+{#        {{ form.as_p }}#}
+        <div class="form-group">
+            <label for="{{ form.teacher_id.id_for_label }}">Teacher ID</label>
+            {{ form.teacher_id }}
+
+            </div>
+            <br>
+            <div class="form-group">
+
+            <label for="{{ form.student_id.id_for_label }}">Student ID</label>
+            {{ form.student_id }}
+        </div>
+
+
+
+
+{#            {% for field in form %}#}
+{#        {% for error in field.errors %}#}
+{#            <div class="alert alert-danger">{{ error }}</div>#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+
+        {% if not student_info %}
+            <br>
+    <br>
+        <button type="submit" class="btn btn-success">Login</button>
+
+        {% endif %}
+
+        {% if student_info %}
+
+
+        <br><br>
+{#        <h3>Teacher Information:</h3>#}
+{#        <p>Is your teacher {{teacher_info.teacher_firstname }} {{ teacher_info.teacher_lastname }}</p>#}
+        <p>Are you {{ student_info.student_name }}?</p>
+            <br>
+
+            {% if user.email == "1" %}
+                <a href="/index" class="btn btn-success">Yes</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/confirm" class="btn btn-success">No</a>
+
+            {% else %}
+                <a href="/index" class="btn btn-success">Yes</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/confirm" class="btn btn-success">No</a>
+
+            {% endif %}
+
+
+    {% endif %}
+    </form>
+
+
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+    {% endif %}
+
+</div>
+</body>
+</html>

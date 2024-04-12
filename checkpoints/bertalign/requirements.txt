@@ -1,0 +1,6 @@
+numba
+#faiss-cpu
+faiss-gpu
+googletrans
+sentence-splitter
+sentence-transformers
