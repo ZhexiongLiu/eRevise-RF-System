@@ -8,7 +8,7 @@ Our project studies the use of Natural Language Processing (NLP) techniques to s
 
 eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We also provide a recorded [Demo Video](https://youtu.be/AOyd7sVHRwg?feature=shared) and [Poster](https://drive.google.com/file/d/1DvZ5QeaLAkk_G_36Pq_duAyc22DDmbZB/view) to illustrate the eRevise+RF system usage. Please note the system is not open for registration at the moment due to IRB constraints at the University of Pittsburgh to protect user privacy. Please contact the authors to request testing accounts.
 
-Please visit [https://sites.google.com/view/erevise](https://sites.google.com/view/erevise) for more information about our publication.
+Please visit our [Project Homepage](https://sites.google.com/view/erevise) for more information about our publication.
 
 
 
