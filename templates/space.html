@@ -1,0 +1,488 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <head>
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+                .rounded-box {
+            {#width: 200px;#}
+            {#height: 200px;#}
+            background-color: #f2f2f2; /* Light gray color */
+            border-radius: 15px; /* Adjust the border-radius to control the roundness */
+
+
+        }
+
+
+    body {
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Hide default body scrollbars */
+        {#font-size: 18px;#}
+    }
+
+    #container {
+      display: flex;
+      height: 100vh; /* 100% of the viewport height */
+        {#margin: 0 auto; /* Center the container horizontally */#}
+        {#    max-width: 2800px;#}
+    {#margin-top: 100px;#}
+
+
+        margin-left: -12%; /* Set left margin to -100px or adjust as needed */
+        margin-right: -12%;
+        {#max-width: calc(100% + 600px);#}
+        {#margin-left: 0%;/* Add space at the top and center the container horizontally */#}
+
+    }
+
+    #left, #right {
+      flex: 1;
+      padding: 30px;
+        margin-top: 80px;
+      overflow-y: scroll; /* Always show a hidden scrollbar, even if it's not in use */
+        {#position: relative;#}
+        {#margin-top: 60px;#}
+        position: relative;
+        {#margin-bottom: 100px;#}
+
+    }
+
+    {##left {#}
+    {#  background-color: #f0f0f0;}#}
+    {##}
+    #right {
+      background-color: #ffffff;
+    {#margin-bottom: 100px;}#}
+
+
+
+    textarea {
+      width: 100%;
+      height: 400px;
+      box-sizing: border-box;
+      overflow: hidden; /* Hide the scrollbar within the textarea */
+        {#margin-bottom: 100px;#}
+    }
+
+
+
+
+  </style>
+
+
+    </head>
+
+
+
+
+    {% if user.is_authenticated %}
+
+
+        <div id="container">
+    <div id="left">
+{#      <h2>Left Content</h2>#}
+{# {{ level }}#}
+    <div class="rounded-box" style="background-color: #fffffe"> <div style="margin: 20px;"> <br>
+        {% if previous_revision is not None %}
+{#                {% include 'space_essay_color.html' %}#}
+                {{annotating_text | safe}}
+            {% else %}
+                {% include 'space_essay.html' %}
+            {% endif %}
+
+        <br><br><br>
+    </div></div>
+
+    </div>
+
+
+    <div id="right">
+{#      <h2>Right Content</h2>#}
+      <div>
+            <form name="submit" method="post" id="submit_form">
+                {% csrf_token %}
+
+
+{#                <h5>Prompt</h5>#}
+{#                {{ init_prompt }}#}
+                {#    {% for prompt in prompt_list %}#}
+                {#        {{ prompt }}#}
+                {#    {% endfor %}#}
+{#                <br>#}
+
+{#                <hr>#}
+                {% if previous_revision is not None %}
+                    <h5><strong>Your Submitted Draft {{ revision|add:"-1" }}</strong></h5>
+                    <div class="rounded-box"> <div style="margin: 20px;"> <br>
+                        {{ previous_revision }}
+
+                    {#                {% if submited_essay is not None %}#}
+                    {#                    {% include 'SPACE_submission_color.html' %}#}
+                    {#                {% endif %}#}
+                    <br>
+                    <br></div></div><br>
+{#                    <hr>#}
+
+
+
+                    {% if revision <= 3 %}
+                        <h5><strong>Your Feedback on Draft {{ revision|add:"-1" }}</strong></h5>
+                                      <div class="rounded-box"> <div style="margin: 20px;"> <br>{% for feedback in feedback_list %}
+
+                                            <h5>{{ feedback.title }}</h5>
+                                            {% for text in feedback.content %}
+                                                <li style="padding-left: 20px;">{{ text }}</li>
+                                            {% endfor %}
+                                          <br>
+                                      {% endfor %} </div> </div><br>
+{#                        {{ auto_feedback }}#}
+
+                        {% if teacher_feedback|length >= 1 %}
+{#                            <br>#}
+{#                    <br>#}
+{#                    <hr>#}
+                            <h5><strong>Your Teacher Feedback on Draft {{ revision|add:"-1" }}</strong></h5>
+                                           <div class="rounded-box"> <div style="margin: 20px;"> <br>
+                                               {{ teacher_feedback }}
+                                                <br>
+{#                                           {% endfor %}#}
+                                               <br></div></div><br>
+{#                            {{ teacher_feedback }}#}
+                        {% endif %}
+{#                        <br>#}
+{#                    <br>#}
+{#                    <hr>#}
+                        <h5><strong>Please Submit Your Draft {{ revision }}</strong> </h5><br>
+                            <div id="essay_text">{{ form.essay }}<div>
+                            <br>
+                            {#            <h2>{{ successful }}</h2>#}
+                            {#    <br>#}
+                            {#    {% endfor %}#}
+                            {#    <h5>Revise Your Essay</h5>#}
+                            {#    {{form.essay }}#}
+                            {#    <br>#}
+                            <button class="btn btn-lg btn-success btn-block" type="submit" onclick="confirmSubmit()">
+                                Submit
+                            </button>
+                    {% endif %}
+                {% else %}
+                    {% if revision <= 3 %}
+                        <h5><strong>Please Submit Your Draft {{ revision }} </strong></h5><br>
+                        <div id="essay_text">{{ form.essay }}<div>
+                        <br>
+                        {#            <h2>{{ successful }}</h2>#}
+                        {#    <br>#}
+                        {#    {% endfor %}#}
+                        {#    <h5>Revise Your Essay</h5>#}
+                        {#    {{form.essay }}#}
+                        {#    <br>#}
+                        <button class="btn btn-lg btn-success btn-block" type="submit" onclick="confirmSubmit()">
+                            Submit
+                        </button>
+                        <br><br><br><br><br><br>
+                    {% endif %}
+                {% endif %}
+
+                <br>
+            </form>
+            <br><br>
+        </div>
+    </div>
+  </div>
+
+
+
+
+{#        <div class="col1">#}
+            {#        <h5>Essay Topic</h5>#}
+            {#    <img src="{% static "images/mvp_article.png" %}" alt="SPACE Essay"/>#}
+{#            {% if previous_revision is not None %}#}
+{#                {% include 'mvp_essay_color.html' %}#}
+{#            {% else %}#}
+{#                {% include 'mvp_essay.html' %}#}
+{#            {% endif %}#}
+{##}
+{#            <br><br><br><br><br><br><br><br>#}
+{#        </div>#}
+{##}
+{#        <div class="col2">#}
+{#            <form name="submit" method="post" id="submit_form">#}
+{#                {% csrf_token %}#}
+{##}
+{##}
+{#                <h5>Prompt</h5>#}
+{#                {{ init_prompt }}#}
+                {#    {% for prompt in prompt_list %}#}
+                {#        {{ prompt }}#}
+                {#    {% endfor %}#}
+{#                <br>#}
+{##}
+{#                <hr>#}
+{#                {% if previous_revision is not None %}#}
+{#                    <h5>Your Submitted Draft {{ revision|add:"-1" }}</h5>#}
+{#                    {{ previous_revision }}#}
+{##}
+                    {#                {% if submited_essay is not None %}#}
+                    {#                    {% include 'SPACE_submission_color.html' %}#}
+                    {#                {% endif %}#}
+{#                    <hr>#}
+{##}
+{##}
+{##}
+{#                    {% if revision <= 3 %}#}
+{#                        <h5>Revision Feedback on Draft {{ revision|add:"-1" }}</h5>#}
+{#                                        {% for feedback in feedback_list %}#}
+{#                                            <h6>{{ feedback.title }}</h6>#}
+{#                                            {% for text in feedback.content %}#}
+{#                                                <li style="padding-left: 20px;">{{ text }}</li>#}
+{#                                            {% endfor %}#}
+{#                                            <br>#}
+{#                                        {% endfor %}#}
+{#                        {{ auto_feedback }}#}
+{##}
+{#                        {% if teacher_feedback|length >= 1 %}#}
+{#                            <hr>#}
+{#                            <h5>Teacher Feedback on Draft {{ revision|add:"-1" }}</h5>#}
+{#                                            {% for feedback in feedback_list %}#}
+{#                                                <h6>{{ feedback.title }}</h6>#}
+{#                                                {% for text in feedback.content %}#}
+{#                                                    <li>{{ text }}</li>#}
+{#                                                {% endfor %}#}
+{#                                                <br>#}
+{#                                            {% endfor %}#}
+{#                            {{ teacher_feedback }}#}
+{#                        {% endif %}#}
+{#                        <hr>#}
+{#                            <h5>Please Submit Your Draft {{ revision }} </h5><br>#}
+{#                            <div id="essay_text">{{ form.essay }}<div>#}
+{#                            <br>#}
+                            {#            <h2>{{ successful }}</h2>#}
+                            {#    <br>#}
+                            {#    {% endfor %}#}
+                            {#    <h5>Revise Your Essay</h5>#}
+                            {#    {{form.essay }}#}
+                            {#    <br>#}
+{#                            <button class="btn btn-lg btn-success btn-block" type="submit" onclick="confirmSubmit()">#}
+{#                                Submit#}
+{#                            </button>#}
+{#                    {% endif %}#}
+{#                {% else %}#}
+{#                    {% if revision <= 3 %}#}
+{#                        <h5>Please Submit Your Draft {{ revision }} </h5><br>#}
+{#                        <div id="essay_text">{{ form.essay }}<div>#}
+{#                        <br>#}
+                        {#            <h2>{{ successful }}</h2>#}
+                        {#    <br>#}
+                        {#    {% endfor %}#}
+                        {#    <h5>Revise Your Essay</h5>#}
+                        {#    {{form.essay }}#}
+                        {#    <br>#}
+{#                        <button class="btn btn-lg btn-success btn-block" type="submit" onclick="confirmSubmit()">#}
+{#                            Submit#}
+{#                        </button>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{##}
+{#                <br>#}
+{#            </form>#}
+{#            <br><br>#}
+{#        </div>#}
+
+
+        {#    <form name="submit" method="post" id="submit_form">#}
+        {#        {% csrf_token %}#}
+        {#        <label for="first_name">UserName:</label><br>#}
+        {#        <input type="text" id="user_name" name="user_name"><br>#}
+        {#        <label for="last_name">Prompt Name:</label><br>#}
+        {#        <input type="text" id="prompt_name" name="prompt_name"><br>#}
+        {#        <label for="essay_revision">Essay Revision:</label><br>#}
+        {#        <input type="text" id="essay_revision" name="essay_revision"><br>#}
+        {#        <label for="essay">Input your essay:</label><br>#}
+        {#        <textarea rows="5" cols="80" id="essay" form="submit_form" name="essay"></textarea><br>#}
+        {#        <button type="submit" class="btn btn-success">Submit</button>#}
+        {#            {% for field in form %}#}
+        {#      <p>#}
+        {#        {% if not form.is_valid %}#}
+        {#          <p style="color: blue">invalid submission</p>#}
+        {#        {% endif %}#}
+        {#      </p>#}
+        {#                <p>{{ form.POST }}</p>#}
+        {#    {% endfor %}#}
+        {#    </form>#}
+
+
+
+        <script>
+            $(document).ready(function () {
+                // Set the URL where the autosave data should be sent
+                var autosaveUrl = '/space';  // Replace with your actual autosave endpoint
+
+                // Get the essay input field
+                var essayInput = $('#essay_text_box');  // Replace with the actual ID of your essay input field
+
+                // Variable to track whether the submission button is clicked
+                var isSubmitted = false;
+
+                // Function to trigger autosave
+                function autosave() {
+                    // Check if the submission button is not clicked
+                    if (!isSubmitted) {
+                        // Get the content of the essay input field
+                        var essayContent = essayInput.val();
+
+                        // Save the content to local storage
+                        localStorage.setItem('autosave_essay_content', essayContent);
+
+                        // Send an AJAX request to save the content
+                        $.ajax({
+                            type: 'POST',
+                            url: autosaveUrl,
+                            data: {
+                                'essay_content': essayContent,
+                                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                            },
+                            success: function (data) {
+                                // Optionally handle success response
+                                console.log('Autosaved successfully');
+                            },
+                            error: function (xhr, status, error) {
+                                // Optionally handle error
+                                console.error('Autosave failed:', error);
+                            }
+                        });
+                    }
+                }
+
+                // Set up autosave to trigger at the specified interval
+                var autosaveInterval = 1000;  // Adjust the interval as needed
+                setInterval(autosave, autosaveInterval);
+
+                // Add event listener to the submission button
+                $('#submit_form button[type="submit"]').on('click', function () {
+                    // Set the flag to indicate submission
+                    isSubmitted = true;
+
+                    // Optionally, you can disable the autosave after submission
+                    clearInterval(autosaveInterval);
+
+                    // Remove the saved content from local storage after submission
+                    localStorage.removeItem('autosave_essay_content');
+
+
+                });
+
+                // Retrieve the content from local storage on page load
+                var storedEssayContent = localStorage.getItem('autosave_essay_content');
+                if (storedEssayContent !== null) {
+                    essayInput.val(storedEssayContent);
+                }
+            });
+        </script>
+
+
+        <script>
+            // Redirect to the desired URL after successful submission
+            // Wait for 3 seconds before redirecting
+            if ("{{ successful }}" === "True") {
+                // Prevent the default form submission
+                {#event.preventDefault();#}
+
+                // Redirect to the desired URL
+                setTimeout(function () {
+                    // Replace the URL below with the desired redirection URL
+                    var user_name = "{{ user_name }}";
+                    if ('{{ revision }}' === '1') {
+                        window.location.href = 'https://pitt.co1.qualtrics.com/jfe/form/SV_bl3LETh5n2a0u9g?username=' + user_name;
+                    }
+                    else if ('{{ revision }}' === '2') {
+                        window.location.href = 'https://pitt.co1.qualtrics.com/jfe/form/SV_3xh6TOvUosbJ0Y6?username=' + user_name;
+                    }
+                    else {
+                        window.location.href = 'https://pitt.co1.qualtrics.com/jfe/form/SV_418I3ax67NCQfrM?username=' + user_name;
+                    }
+
+                }, 0);
+
+            }
+            ;
+
+        </script>
+
+        <script>
+            function confirmSubmit() {
+                // Display a Bootstrap-styled confirmation dialog
+                var confirmation = confirm("Do you want to submit your essay?");
+
+                if (confirmation) {
+                    // If the user clicks "OK," submit the form
+                    document.getElementById("submit_form").submit();
+                } else {
+                    event.preventDefault();
+                    // If the user clicks "Cancel," do nothing (stay on the current page)
+                }
+            }
+        </script>
+
+        <script>
+        // Set the session timeout in seconds (should match SESSION_COOKIE_AGE)
+        var sessionTimeout = 3600;
+
+        // Function to logout and submit the form
+        function logoutAndSubmitForm() {
+            // Replace '/logout/' with your actual logout URL
+            document.getElementById('submit_form').submit();
+        }
+
+        // Set up a timer to logout after sessionTimeout seconds
+        var logoutTimer = setTimeout(logoutAndSubmitForm, sessionTimeout * 1000);
+
+        // Reset the timer on user activity (e.g., mouse movement or key press)
+        document.addEventListener('mousemove', function () {
+            clearTimeout(logoutTimer);
+            logoutTimer = setTimeout(logoutAndSubmitForm, sessionTimeout * 1000);
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(logoutTimer);
+            logoutTimer = setTimeout(logoutAndSubmitForm, sessionTimeout * 1000);
+        });
+
+        // Reload the page after form submission
+        window.addEventListener('unload', function() {
+            window.location.reload();
+        });
+    </script>
+       <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const leftSection = document.getElementById("left");
+        const rightSection = document.getElementById("right");
+
+        // Add a scroll event listener to update the custom scrollbar position
+        leftSection.addEventListener("scroll", function () {
+            updateCustomScrollbar(leftSection);
+        });
+
+        rightSection.addEventListener("scroll", function () {
+            updateCustomScrollbar(rightSection);
+        });
+
+        // Initial update for custom scrollbar positions
+        updateCustomScrollbar(leftSection);
+        updateCustomScrollbar(rightSection);
+    });
+
+    // Function to update the custom scrollbar position
+    function updateCustomScrollbar(section) {
+        const customScrollbar = section.querySelector(".custom-scrollbar");
+        const scrollPercentage = (section.scrollTop / (section.scrollHeight - section.clientHeight)) * 100;
+        customScrollbar.style.top = `${scrollPercentage}%`;
+    }
+</script>
+
+    {% endif %}
+{% endblock %}

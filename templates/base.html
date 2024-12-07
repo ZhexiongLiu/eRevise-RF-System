@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}eRevise System{% endblock %}</title>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: #0033A0;
+             z-index: 1000;
+            {#background-color: #00205B;#}
+            {#color: #0033A0;#}
+        {#    background-color: blue;#}{#font-variant: small-caps;#} font-size: large;
+        }
+
+        html, body, .col1, .col2 {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            margin: 0 auto;
+
+            font-family: Arial, sans-serif;
+        }
+
+    </style>
+
+</head>
+<body id=body onscroll=SetCookie("scroll",document.documentElement.scrollTop); onload="scrollback();">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand" href="/index">eRevise System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    {% if user.email == "1" %}
+                        <a class="nav-link" href="/mvp/article">Article</a>
+{#                    {% elif user.email == 0 %}#}
+{#                        <a class="nav-link" href="/space">Essay</a>#}
+                    {% else %}
+                        <a class="nav-link" href="/space/article">Article</a>
+                    {% endif %}
+
+                </li>
+                <li class="nav-item active">
+                    {% if user.email == "1" %}
+                        <a class="nav-link" href="/mvp">Essay</a>
+{#                    {% elif user.email == 0 %}#}
+{#                        <a class="nav-link" href="/space">Essay</a>#}
+                    {% else %}
+                        <a class="nav-link" href="/space">Essay</a>
+                    {% endif %}
+
+                </li>
+{#                <li class="nav-item dropdown active">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
+{#                       data-toggle="dropdown"#}
+{#                       aria-haspopup="true" aria-expanded="false">#}
+{#                        Essays#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="/mvp">MVP essay</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="/space">SPACE essay</a>#}
+{#                    </div>#}
+{#                </li>#}
+            {% endif %}
+            {% if user.is_authenticated and user.is_staff %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/submission">Submission</a>
+                </li>
+            {% endif %}
+            {% if user.is_authenticated and user.is_staff and user.is_superuser%}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/process">Process</a>
+                </li>
+            {% endif %}
+                    {% if user.is_authenticated and user.is_staff %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/roster">Roster</a>
+                </li>
+            {% endif %}
+                            {% if user.is_authenticated and user.is_staff and user.is_superuser%}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/upload">Upload</a>
+                </li>
+            {% endif %}
+{#            <li class="nav-item active">#}
+{#                <a class="nav-link" href="https://sites.google.com/view/erevise">About</a>#}
+{#            </li>#}
+        </ul>
+
+        <!-- Right-aligned items -->
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" role="button">{{ user.first_name }} </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signout" class="btn btn-danger">Logout</a>
+                    {#                <a href="/profile" class="btn btn-primary">Profile</a>#}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    {#    <div class="fixed-header">#}
+    {#        <header>#}
+    {#    <h2></h2>#}
+    {#            <title>submit essay</title>#}
+    {#            {% if user.is_authenticated %}#}
+    {#                Hi {{ user.username }}!#}
+    {#                <a href="/signout" class="btn btn-danger">Logout</a>#}
+    {#                <a href="/profile" class="btn btn-primary">Profile</a>#}
+    {#            {% endif %}#}
+    {#            <br><br>#}
+    {#            {% load static %}#}
+    {#        </header>#}
+    {#    </div>#}
+
+    {#  <hr>#}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {#  <hr>#}
+</div>
+<!-- Add Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+    function Trim(strValue) {
+//return strValue.replace(/^s*|s*$/g,"");
+        return strValue;
+    }
+
+    function SetCookie(sName, sValue) {
+        document.cookie = sName + "=" + escape(sValue);
+    }
+
+    function GetCookie(sName) {
+        var aCookie = document.cookie.split(";");
+        for (var i = 0; i < aCookie.length; i++) {
+            var aCrumb = aCookie[i].split("=");
+            if (sName == Trim(aCrumb[0])) {
+                return unescape(aCrumb[1]);
+            }
+        }
+
+        return null;
+    }
+
+    function scrollback() {
+        if (GetCookie("scroll") != null) {
+            document.documentElement.scrollTop = GetCookie("scroll")
+        }
+    }
+</script>
