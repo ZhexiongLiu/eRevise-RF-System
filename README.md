@@ -6,9 +6,9 @@ The evaluation also suggested eRevise+RF is a helpful system for young students 
 ## About eRevise Project
 Our project studies the use of Natural Language Processing (NLP) techniques to score students' argument writing and provide automated feedback to students to strengthen their essays. We have recently expanded our project to focus on automated assessment of students' revision efforts with feedback to develop their revision skills. Our work has been funded by the National Science Foundations, the Department of Education's Institute of Education Sciences, and the Learning Research & Development Center at University of Pittsburgh. A summary of some of our research contributions is provided in the research brief published by the RAND Corporation. Further detail about our research is located below in the Publications section.
 
-eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We also provide a recorded [Demo Video](https://youtu.be/AOyd7sVHRwg?feature=shared) and [Poster](https://drive.google.com/file/d/1DvZ5QeaLAkk_G_36Pq_duAyc22DDmbZB/view) to illustrate the eRevise+RF system usage. Please note the system is not open to registrate due to IRB constraints at the University of Pittsburgh to protect user privacy. Please contact the author for acquiring testing accounts.
+eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We also provide a recorded [Demo Video](https://youtu.be/AOyd7sVHRwg?feature=shared) and [Poster](https://drive.google.com/file/d/1DvZ5QeaLAkk_G_36Pq_duAyc22DDmbZB/view) to illustrate the eRevise+RF system usage. Please note the system is not open for registration at the moment due to IRB constraints at the University of Pittsburgh to protect user privacy. Please contact the authors to request testing accounts.
 
- Please visit [https://sites.google.com/view/erevise](https://sites.google.com/view/erevise) for more information about our publication.
+Please visit [https://sites.google.com/view/erevise](https://sites.google.com/view/erevise) for more information about our publication.
 
 
 
