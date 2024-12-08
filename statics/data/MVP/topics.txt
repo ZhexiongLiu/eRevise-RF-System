@@ -1,0 +1,4 @@
+hospitals, care, health, hospital, treatment, doctor, electricity, disease, water, sick, medicine, generator, die, kid, bed, patient, clinical, officer, running
+malaria, bed, net, malaria, infect, bednet, mosquito, bug, sleeping, die, cheap, infect, biting
+farming, farmer, fertilizer, irrigation, dying, crop, seed, water, harvest, hungry, feed, food, irrigation
+school, school, supplies, fee, student, midday, meal, lunch, supply, book, paper, pencil, energy, free, children, kid, attend

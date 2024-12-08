@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}eRevise System{% endblock %}
+
+{% block content %}
+<style>
+
+    .center-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh; /* Adjusts the height to vertically center form in the viewport */
+    }
+
+    .form-container {
+        width: 100%; /* You can adjust this to fit your design */
+        max-width: 300px; /* Limits form width */
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Adds shadow for better visibility */
+        background: #fff; /* Optional: for better visibility */
+        border-radius: 10px; /* Optional: Rounds the corners */
+
+    }
+</style>
+<div class="center-form">
+    <div class="form-container">
+        <h2>Teacher Portal</h2> {{ msg }}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Login</button>
+            <!-- Uncomment below to add signup button -->
+            <!-- <a href="/signup" class="btn btn-success">Signup</a> -->
+        </form>
+    </div>
+</div>
+{% endblock %}

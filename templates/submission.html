@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block title %}eRevise System{% endblock %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <title>Student Roster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+
+        h2 {
+            margin-left: 40%;
+            margin-right: 30%;
+            {#margin-bottom: -10px; /* Add margin between title and table */#}
+        }
+        table, form {
+            border-collapse: collapse;
+            width: 120%;
+            {#margin-top: -50px; /* Adjust the margin as needed */#}
+            {#margin-top: 20%;#}
+            margin-left: -10%;
+            margin-right: 0%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 10px;
+            width: 0%; /* Set equal width for each column */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+{#<div class="d-flex">#}
+{#   {% if user.is_authenticated %}#}
+{#      Hi {{ user.username }}!#}
+{#      <a href="/signout" class="btn btn-danger">Logout</a>#}
+{#       <a href="/mvp" class="btn btn-primary mr-2">Submit MVP Essay</a>#}
+{#       <a href="/space" class="btn btn-primary mr-2">Submit Space Essay</a>#}
+{#       <a href="/roaster" class="btn btn-primary mr-2">Show Roaster</a>#}
+{#       <a href="/upload" class="btn btn-primary mr-2">Upload Roaster</a>#}
+{#    {% else %}#}
+{#      <a href="/signin" class="btn btn-primary mr-2"><span class="glyphicon glyphicon-log-in"></span>Login</a>#}
+{#      <a href="/signup" class="btn btn-success ">Signup</a>#}
+{#    {% endif %}#}
+{#</div>#}
+{% if user.is_authenticated and user.is_staff %}
+<br>
+    <h2>Student Submissions</h2>
+                <br><br><br>
+{#    <table border="1">#}
+{#        <tr>#}
+{#            <th>Student ID</th>#}
+{#            <th>Prompt Name</th>#}
+{#            <th style="width: 60%;">Essay</th>#}
+{#            <th>Version</th>#}
+{#            <th>Processed</th>#}
+{#            <th>Timestamp</th>#}
+{#        </tr>#}
+{#        {% for submit in submission %}#}
+{#            <tr>#}
+{#                <td>{{ submit.user_name }}</td>#}
+{#                <td>{{ submit.prompt_name }}</td>#}
+{#                <td>{{ submit.essay_content }}</td>#}
+{#                <td>{{ submit.essay_revision }}</td>#}
+{#                <td>{{ submit.processed}}</td>#}
+{#                <td>{{ submit.submitted_time}}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
+
+
+    <!-- Add filter input elements above the table -->
+<form id="filterForm">
+    <label for="studentIdFilter">Submission ID:</label>
+    <input type="text" id="studentIdFilter">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="promptNameFilter">Prompt Name:</label>
+    <input type="text" id="promptNameFilter">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="versionFilter">Draft:</label>
+    <input type="text" id="versionFilter">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Apply Filters" onclick="applyFilters()">
+</form><br>
+
+<!-- Your existing table -->
+<table border="1" id="dataTable">
+    <!-- Table headers remain unchanged -->
+    <tr>
+        <th style="width: 5%;">Submission ID</th>
+        <th style="width: 5%;">Prompt Name</th>
+        <th style="width: 5%;">Draft</th>
+        <th style="width: 30%;">Essay</th>
+        <th style="width: 15%;">Auto Feedback</th>
+        <th style="width: 10%;">Teacher Feedback (Optional)</th>
+    </tr>
+    <!-- Table body remains unchanged -->
+    {% for submit in submission %}
+        <tr>
+{#            {% with first_three=submit.0.user_name|slice:":3" %}#}
+{#                {% if user.is_superuser == False and first_three == user.username %}#}
+{#                <td>{{ submit.0.user_name }}</td>#}
+{#                <td>{{ submit.0.prompt_name }}</td>#}
+{#                <td>{{ submit.0.essay_revision }}</td>#}
+{#                <td style="text-align: left">{{ submit.0.essay_content }}</td>#}
+{#                <td style="text-align: left">{{ submit.1}}</td>#}
+{#                <td style="text-align: left" contenteditable="true" data-prompt-name="{{ submit.0.prompt_name }}" data-essay-revision="{{ submit.0.essay_revision }}" data-user-name="{{ submit.0.user_name }}" onblur="saveFeedback(this)">{{ submit.2}}</td>#}
+{#                {% endif %}#}
+{#            {% endwith %}#}
+
+{#            {% if user.is_superuser == True %}#}
+            <td>{{ submit.0.user_name }}</td>
+            <td>{{ submit.0.prompt_name }}</td>
+            <td>{{ submit.0.essay_revision }}</td>
+            <td style="text-align: left">{{ submit.0.essay_content }}</td>
+            <td style="text-align: left">{{ submit.1}}</td>
+            <td style="text-align: left" contenteditable="true" data-prompt-name="{{ submit.0.prompt_name }}" data-essay-revision="{{ submit.0.essay_revision }}" data-user-name="{{ submit.0.user_name }}" onblur="saveFeedback(this)">{{ submit.2}}</td>
+{#            {% endif %}#}
+
+        </tr>
+    {% endfor %}
+</table>
+    <br><br><br><br><br>
+
+<script>
+
+document.getElementById("filterForm").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        applyFilters();
+    }
+});
+
+function applyFilters() {
+    // Get filter values
+    var studentIdFilter = document.getElementById("studentIdFilter").value.toLowerCase();
+    var promptNameFilter = document.getElementById("promptNameFilter").value.toLowerCase();
+    var versionFilter = document.getElementById("versionFilter").value.toLowerCase();
+
+    // Loop through rows and apply filters only to specified columns
+    var table = document.getElementById("dataTable");
+    var rows = table.getElementsByTagName("tr");
+    for (var i = 1; i < rows.length; i++) { // Skip header row (i=0)
+        var cells = rows[i].getElementsByTagName("td");
+        if (
+            cells[0].innerText.toLowerCase().includes(studentIdFilter) &&
+            cells[1].innerText.toLowerCase().includes(promptNameFilter) &&
+            cells[2].innerText.toLowerCase().includes(versionFilter)
+        ) {
+            rows[i].style.display = ""; // Show the row
+        } else {
+            rows[i].style.display = "none"; // Hide the row
+        }
+    }
+}
+</script>
+
+
+<script>
+function saveFeedback(cell) {
+    var userName = cell.getAttribute("data-user-name");
+    var promptName = cell.getAttribute("data-prompt-name");
+    var essayRevision = cell.getAttribute("data-essay-revision");
+    var newFeedback = cell.innerText;
+
+    // Make an AJAX request to the server to save the feedback
+    fetch(`/save_feedback/`, { // Note: Changed URL to not include essayId in the path, since it's sent in the body now
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is correctly provided for Django
+        },
+        body: JSON.stringify({
+            user_name: userName,
+            prompt_name: promptName,
+            essay_revision: essayRevision,
+            feedback: newFeedback
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Feedback saved:', data);
+    })
+    .catch(error => {
+        console.error('Error saving feedback:', error);
+    });
+}
+
+</script>
+
+
+
+
+    {% endif %}
+
+
+
+
+{% endblock %}

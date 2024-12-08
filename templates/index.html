@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}eRevise System{% endblock %}
+
+{% block content %}
+
+<style>
+
+
+    #container {
+        display: flex;
+        height: 90vh;
+    }
+
+    #left {
+        flex: 3.5;
+        overflow: hidden;
+        {#border-right: 1px solid #000;#}
+        {#padding-right: 10%;#}
+        white-space: pre-line;
+        flex-direction: column; /* Arrange items in a column */
+        {#background-color: blue;#}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #right {
+        flex: 0.1;
+        padding-top: 15%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    #text-container {
+        font-size: 70px;
+    }
+
+
+</style>
+
+
+<div id="container">
+    <div id="left">
+        <div id="text-container"></div>
+    </div>
+    <div id="right">
+        {% if not user.is_authenticated %}
+        <a href="/signin" class="btn btn-primary" id="userInput" ><span class="glyphicon glyphicon-log-in"></span>Teacher Login</a>
+      &nbsp;&nbsp;&nbsp;<a href="/confirm" class="btn btn-success">Student Login</a>
+            {% endif %}
+    </div>
+</div>
+
+
+<script>
+    // Sentences to be revealed
+    const sentences = [
+        "An Automated Writing Evaluation System",
+        "Support Text-based Argumentation and Revision",
+        "Use AI for Scoring Essays",
+        "Use AI for Providing Essay Feedback",
+        "Provide Writing Feedback At-Scale",
+    ];
+
+    // Get the text container
+    const textContainer = document.getElementById("text-container");
+    const userInput = document.getElementById("right");
+
+    // Function to animate typing
+    function typeSentence(sentence, index, speed) {
+        if (index < sentence.length) {
+            textContainer.innerHTML = sentence.substring(0, index + 1);
+            setTimeout(function () {
+                typeSentence(sentence, index + 1, speed);
+            }, speed);
+        } else {
+            setTimeout(function () {
+                typeNextSentence(); // Start typing the next sentence
+            }, 1000);
+        }
+    }
+
+    // Function to start the animation
+    function startAnimation() {
+        typeSentence(sentences[0], 0, 100); // Start typing the first sentence
+    }
+
+    // Function to switch to the next sentence
+    function typeNextSentence() {
+        const currentSentenceIndex = sentences.indexOf(textContainer.innerHTML);
+        const nextSentenceIndex = (currentSentenceIndex + 1) % sentences.length;
+        textContainer.innerHTML = ""; // Clear the text container
+        userInput.value = ""; // Clear the user input
+        userInput.focus(); // Set focus on the input box
+        setTimeout(function () {
+            typeSentence(sentences[nextSentenceIndex], 0, 100);
+        }, 1000);
+    }
+
+    // Call the animation function initially
+    startAnimation();
+</script>
+
+{% endblock %}
