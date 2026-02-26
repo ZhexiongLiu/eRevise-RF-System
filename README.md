@@ -1,4 +1,6 @@
-# eRevise+RF: A Writing Evaluation System for Assessing Student Essay Revisions and Providing Formative Feedback
+# eRevise+RF System
+
+NAACL 2025 paper: [eRevise+RF: A Writing Evaluation System for Assessing Student Essay Revisions and Providing Formative Feedback](https://aclanthology.org/2025.naacl-demo.18.pdf)
 
 Abstract: The ability to revise essays in response to feedback is important for students' writing success. An automated writing evaluation (AWE) system that supports students in revising their essays is thus essential. We present eRevise+RF, an enhanced AWE system for assessing student essay revisions (e.g., changes made to an essay to improve its quality in response to essay feedback) and providing revision feedback. We deployed the eRevise+RF system in 12 classrooms across 3 schools in Pennsylvania and Louisiana. The results confirmed its effectiveness in (1) assessing student essays in terms of evidence usage, (2) extracting evidence and reasoning revisions across essays, and (3) determining revision success in responding to feedback. 
 The evaluation also suggested eRevise+RF is a helpful system for young students to improve their argumentative writing skills through revision and formative feedback.
@@ -9,5 +11,30 @@ Our project studies the use of Natural Language Processing (NLP) techniques to s
 eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We provide a recorded [demo video](https://youtu.be/AOyd7sVHRwg?feature=shared) and [poster](https://drive.google.com/file/d/1DvZ5QeaLAkk_G_36Pq_duAyc22DDmbZB/view) to illustrate the system usage. Please note the system is not open for registration at the moment due to IRB constraints at University of Pittsburgh to protect young student's privacy. Please contact the author at zhexiong [at] cs.pitt.edu to request a user account.
 
 
-
+## Citation
+```angular2html
+@inproceedings{liu-etal-2025-erevise,
+    title = "e{R}evise+{RF}: A Writing Evaluation System for Assessing Student Essay Revisions and Providing Formative Feedback",
+    author = "Liu, Zhexiong  and
+      Litman, Diane  and
+      Wang, Elaine L  and
+      Li, Tianwen  and
+      Gobat, Mason  and
+      Matsumura, Lindsay Clare  and
+      Correnti, Richard",
+    editor = "Dziri, Nouha  and
+      Ren, Sean (Xiang)  and
+      Diao, Shizhe",
+    booktitle = "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (System Demonstrations)",
+    month = apr,
+    year = "2025",
+    address = "Albuquerque, New Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.naacl-demo.18/",
+    doi = "10.18653/v1/2025.naacl-demo.18",
+    pages = "173--190",
+    ISBN = "979-8-89176-191-9",
+    abstract = "The ability to revise essays in response to feedback is important for students' writing success. An automated writing evaluation (AWE) system that supports students in revising their essays is thus essential. We present eRevise+RF, an enhanced AWE system for assessing student essay revisions (e.g., changes made to an essay to improve its quality in response to essay feedback) and providing revision feedback. We deployed the system with 6 teachers and 406 students across 3 schools in Pennsylvania and Louisiana. The results confirmed its effectiveness in (1) assessing student essays in terms of evidence usage, (2) extracting evidence and reasoning revisions across essays, and (3) determining revision success in responding to feedback. The evaluation also suggested eRevise+RF is a helpful system for young students to improve their argumentative writing skills through revision and formative feedback."
+}
+```
 
