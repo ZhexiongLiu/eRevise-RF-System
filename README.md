@@ -15,16 +15,8 @@ eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We prov
 ```angular2html
 @inproceedings{liu-etal-2025-erevise,
     title = "e{R}evise+{RF}: A Writing Evaluation System for Assessing Student Essay Revisions and Providing Formative Feedback",
-    author = "Liu, Zhexiong  and
-      Litman, Diane  and
-      Wang, Elaine L  and
-      Li, Tianwen  and
-      Gobat, Mason  and
-      Matsumura, Lindsay Clare  and
-      Correnti, Richard",
-    editor = "Dziri, Nouha  and
-      Ren, Sean (Xiang)  and
-      Diao, Shizhe",
+    author = "Liu, Zhexiong  and Litman, Diane  and Wang, Elaine L  and Li, Tianwen  and Gobat, Mason  and Matsumura, Lindsay Clare  and Correnti, Richard",
+    editor = "Dziri, Nouha  and Ren, Sean (Xiang)  and Diao, Shizhe",
     booktitle = "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (System Demonstrations)",
     month = apr,
     year = "2025",
