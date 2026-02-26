@@ -33,8 +33,7 @@ eRevise+RF system has been launched here https://erevise.lrdc.pitt.edu/. We prov
     url = "https://aclanthology.org/2025.naacl-demo.18/",
     doi = "10.18653/v1/2025.naacl-demo.18",
     pages = "173--190",
-    ISBN = "979-8-89176-191-9",
-    abstract = "The ability to revise essays in response to feedback is important for students' writing success. An automated writing evaluation (AWE) system that supports students in revising their essays is thus essential. We present eRevise+RF, an enhanced AWE system for assessing student essay revisions (e.g., changes made to an essay to improve its quality in response to essay feedback) and providing revision feedback. We deployed the system with 6 teachers and 406 students across 3 schools in Pennsylvania and Louisiana. The results confirmed its effectiveness in (1) assessing student essays in terms of evidence usage, (2) extracting evidence and reasoning revisions across essays, and (3) determining revision success in responding to feedback. The evaluation also suggested eRevise+RF is a helpful system for young students to improve their argumentative writing skills through revision and formative feedback."
+    ISBN = "979-8-89176-191-9"
 }
 ```
 
